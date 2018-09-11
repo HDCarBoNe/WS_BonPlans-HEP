@@ -1,8 +1,7 @@
 <?php
     session_start();
     include_once('config.php');
-    $bdd = new PDO("mysql:host=".Config::SERVERNAME.";dbname=".Config::DBNAME
-               , Config::USER, Config::PASSWORD);
+    $bdd = new PDO("mysql:host=".Config::SERVERNAME.";dbname=".Config::DBNAME, Config::USER, Config::PASSWORD);
 ?>
 <!-- Faire les login de connection -->
 <!-- rajouter les différents menu si l'utilisateur est connecter -->
@@ -43,7 +42,7 @@
         <!-- Verif login -->
         <?php if (isset($_POST['login'])){
                     //  Récupération des données de l'utilisateur grace de son pass crypter
-                    $req = $bdd->prepare("SELECT idUtilisateur FROM utilisateurs WHERE Identifiant = :login AND mdp = :mdp");
+                    $req = $bdd->prepare("SELECT idUtilisateur, TypeUtilisateur FROM utilisateurs WHERE Identifiant = :login AND mdp = :mdp");
                     $req->bindParam(":login",$_POST['login']);
                     $req->bindParam(":mdp",$_POST['mdp']);
                     $req->execute();
@@ -55,6 +54,7 @@
                     else
                     {
                         $_SESSION['id'] = $resultat['idUtilisateur'];
+                        $_SESSION['droit'] = $resultat['TypeUtilisateur'];
                         echo '<script language="JavaScript" type="text/javascript">window.location.replace("index.php");</script>';
                     }
                 } ?>
@@ -72,24 +72,68 @@
               <a class="nav-link" href="#">Bon Plans</a>
             </li>
             <?php
+                echo $_SESSION['droit'];
                 if (!isset($_SESSION['id'])) {
                   echo '<li class="nav-item">
                     <a href="#" class="add-project nav-link" data-toggle="modal" data-target="#connect">Se connecter</a>
                   </li>';
                 }
-                else {
+                elseif ($_SESSION['droit'] = 2) {
                   echo '<li class="nav-item">
-                    <a href="#" class="add-project nav-link" data-toggle="modal" data-target="#add_bp">Ajouter Bon plan</a>
+                    <a href="#" class="add-project nav-link" data-toggle="modal" data-target="#add_bp">Proposer Bon plan</a>
+                  </li>';
+
+                  echo '<li class="nav-item">
+                    <a href="profil.php?id='.$_SESSION['id'].'" class="nav-link">Profil</a>
                   </li>';
 
                   echo '<li class="nav-item">
                     <a href="deco.php" class="nav-link">Deconnexion</a>
                   </li>';
                 }
+                elseif ($_SESSION['droit'] = 1) {
+                  echo '<li class="nav-item">
+                    <a href="#" class="add-project nav-link" data-toggle="modal" data-target="#add_bp">Proposer Bon plan</a>
+                  </li>';
+
+                  echo '<li class="nav-item">
+                             <a class="nav-link dropdown-toggle" href="#" id="navadmin" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Administration</a>
+                             <div class="dropdown-menu" aria-labelledby="navadmin">
+                               <a href="#" class="add-project dropdown-item" data-toggle="modal" data-target="#add_bp">Ajouter news</a>
+                               <a href="#" class="add-project dropdown-item" data-toggle="modal" data-target="#add_bp">Liste propositions</a>
+                               <a class="dropdown-item" href="#">Something else here</a>
+                             </div>
+                            </li>';
+
+                  echo '<li class="nav-item">
+                    <a href="profil.php?id='.$_SESSION['id'].'" class="nav-link">Profil</a>
+                  </li>';
+
+                  echo '<li class="nav-item">
+                    <a href="deco.php" class="nav-link">Deconnexion</a>
+                  </li>';
+                }
+                elseif ($_SESSION['droit'] = 3) {
+                  echo '<li class="nav-item">
+                    <a href="#" class="add-project nav-link" data-toggle="modal" data-target="#add_bp">Proposer Bon plan</a>
+                  </li>';
+
+                  echo '<li class="nav-item">
+                    <a href="#" class="add-project nav-link" data-toggle="modal" data-target="#add_bp">Proposer son offre </a>
+                  </li>';
+
+                  echo '<li class="nav-item">
+                    <a href="profil.php?id='.$_SESSION['id'].'" class="nav-link">Profil</a>
+                  </li>';
+
+                  echo '<li class="nav-item">
+                    <a href="deco.php" class="nav-link">Deconnexion</a>
+                  </li>';
+                }
+
             ?>
             <form class="form-inline">
               <input class="form-control mr-sm-2" type="search" placeholder="Rechercher" aria-label="Search">
-              <button class="btn btn-success my-2 my-sm-0" type="submit">Rechercher</button>
             </form>
           </ul>
         </div>
