@@ -54,7 +54,6 @@
                     else
                     {
                         $_SESSION['id'] = $resultat['idUtilisateur'];
-                        $_SESSION['droit'] = $resultat['TypeUtilisateur'];
                         echo '<script language="JavaScript" type="text/javascript">window.location.replace("index.php");</script>';
                     }
                 } ?>
@@ -72,13 +71,18 @@
               <a class="nav-link" href="#">Bon Plans</a>
             </li>
             <?php
-                echo $_SESSION['droit'];
+                $req2 = $bdd->prepare("SELECT TypeUtilisateur FROM utilisateurs WHERE idUtilisateur = :id");
+                $req2->bindParam(":id",$_SESSION['id']);
+                $req2->execute();
+                $res = $req2->fetch();
+                $droit = $res['TypeUtilisateur'];
+
                 if (!isset($_SESSION['id'])) {
                   echo '<li class="nav-item">
                     <a href="#" class="add-project nav-link" data-toggle="modal" data-target="#connect">Se connecter</a>
                   </li>';
                 }
-                elseif ($_SESSION['droit'] = 2) {
+                if ($droit == 2) {
                   echo '<li class="nav-item">
                     <a href="#" class="add-project nav-link" data-toggle="modal" data-target="#add_bp">Proposer Bon plan</a>
                   </li>';
@@ -91,17 +95,16 @@
                     <a href="deco.php" class="nav-link">Deconnexion</a>
                   </li>';
                 }
-                elseif ($_SESSION['droit'] = 1) {
+                if ($droit == 1) {
                   echo '<li class="nav-item">
                     <a href="#" class="add-project nav-link" data-toggle="modal" data-target="#add_bp">Proposer Bon plan</a>
                   </li>';
 
-                  echo '<li class="nav-item">
+                  echo '<li class="nav-item dropdown">
                              <a class="nav-link dropdown-toggle" href="#" id="navadmin" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Administration</a>
                              <div class="dropdown-menu" aria-labelledby="navadmin">
-                               <a href="#" class="add-project dropdown-item" data-toggle="modal" data-target="#add_bp">Ajouter news</a>
-                               <a href="#" class="add-project dropdown-item" data-toggle="modal" data-target="#add_bp">Liste propositions</a>
-                               <a class="dropdown-item" href="#">Something else here</a>
+                               <a href="#" class="dropdown-item add-project" data-toggle="modal" data-target="#add_bp">Ajouter news</a>
+                               <a href="#" class="dropdown-item add-project" data-toggle="modal" data-target="#add_bp">Liste propositions</a>
                              </div>
                             </li>';
 
@@ -113,7 +116,7 @@
                     <a href="deco.php" class="nav-link">Deconnexion</a>
                   </li>';
                 }
-                elseif ($_SESSION['droit'] = 3) {
+                if ($droit == 3) {
                   echo '<li class="nav-item">
                     <a href="#" class="add-project nav-link" data-toggle="modal" data-target="#add_bp">Proposer Bon plan</a>
                   </li>';
