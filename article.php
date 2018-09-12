@@ -17,6 +17,9 @@
       $req->execute();
     }
 ?>
+
+<!-- faire les catégorie de l'article  -->
+
 <!DOCTYPE html>
 <html lang="fr">
 
