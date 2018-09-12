@@ -3,9 +3,7 @@
     include_once('config.php');
     $bdd = new PDO("mysql:host=".Config::SERVERNAME.";dbname=".Config::DBNAME, Config::USER, Config::PASSWORD);
 ?>
-<!-- Faire les login de connection -->
-<!-- rajouter les différents menu si l'utilisateur est connecter -->
-<!-- boutton ajouter un news si l'utilisateur est modérateur -->
+<!-- Ajouter les popups menu -->
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -103,8 +101,8 @@
                   echo '<li class="nav-item dropdown">
                              <a class="nav-link dropdown-toggle" href="#" id="navadmin" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Administration</a>
                              <div class="dropdown-menu" aria-labelledby="navadmin">
-                               <a href="#" class="dropdown-item add-project" data-toggle="modal" data-target="#add_bp">Ajouter news</a>
-                               <a href="#" class="dropdown-item add-project" data-toggle="modal" data-target="#add_bp">Liste propositions</a>
+                               <a href="#" class="dropdown-item add-project" data-toggle="modal" data-target="#add_news">Ajouter news</a>
+                               <a href="#" class="dropdown-item add-project" data-toggle="modal" data-target="#list_propo">Liste propositions</a>
                              </div>
                             </li>';
 
@@ -264,4 +262,57 @@
       </div>
   </div>
   <!-- fin popup connection -->
+  <!-- popup ajout bon plans -->
+  <div id="add_bp" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header login-header">
+                  <h4 class="modal-title">Partager votre bon plans !</h4>
+                  <button type="button" class="close" data-dismiss="modal">×</button>
+              </div>
+              <div class="modal-body">
+                  <form method="POST" action="add_bp.php">
+                  <br>
+                  <label for="titre">Titre de votre bon plan :</label>
+                  <input class="form-control" type="text" name="titre" id="titre" placeholder="Titre" required></input>
+                  <br>
+                  <label for="text-area">Expliquer nous votre bon plan :</label>
+                  <textarea class="form-control" name="text-area" id="text-area" rows="3" placeholder="Le lieu, les conditions du bon plan, les dates jusqu'au quel le bon plan sera disponible ... " required></textarea>
+                  <br>
+                  <input type="hidden" value="<?php echo $_SESSION['id'] ?>" name="id_uti"></input>
+                  <input class="btn btn-outline-primary" type="submit" value="Partager !" id="addCr2"/>
+              </div>
+          </div>
+        </form>
+      </div>
+  </div>
+  <!-- fin popup ajout bon plans -->
+  <!-- popup ajout news-->
+  <div id="add_news" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header login-header">
+                  <h4 class="modal-title">Partager une News</h4>
+                  <button type="button" class="close" data-dismiss="modal">×</button>
+              </div>
+              <div class="modal-body">
+                  <form method="POST" action="add_news.php">
+                  <br>
+                  <label for="titre">Titre de votre news :</label>
+                  <input class="form-control" type="text" name="titre" id="titre" placeholder="Titre" required></input>
+                  <br>
+                  <label for="text-area">Détails de la news :</label>
+                  <textarea class="form-control" name="text-area" id="text-area" rows="3" placeholder="Le lieu, les conditions de la news, les dates concernant la news ... " required></textarea>
+                  <br>
+                  <label for="photo"> Ajouter une image</label>
+                  <input type="file" class="form-control-file" id="photo" name="photo"></input>
+                  <br>
+                  <input type="hidden" value="<?php echo $_SESSION['id'] ?>" name="id_uti"></input>
+                  <input class="btn btn-outline-primary" type="submit" value="Partager !" id="addCr2"/>
+              </div>
+          </div>
+        </form>
+      </div>
+  </div>
+  <!-- fin popup ajout bon plans -->
 </html>
