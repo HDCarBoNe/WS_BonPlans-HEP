@@ -29,13 +29,13 @@
    <!-- Faire des conditions pour rajouter des menus dans la barres des taches quand l'utilisateurs est connecter -->
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Accueil
+        <li class="nav-item">
+          <a class="nav-link" href="index.php">Accueil
             <span class="sr-only">(current)</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Bon Plans</a>
+          <a class="nav-link" href="bp.php">Bon Plans</a>
         </li>
         <?php
             $req2 = $bdd->prepare("SELECT TypeUtilisateur FROM utilisateurs WHERE idUtilisateur = :id");
@@ -46,6 +46,10 @@
 
             if (!isset($_SESSION['id'])) {
               echo '<li class="nav-item">
+                <a href="#" class="add-project nav-link" data-toggle="modal" data-target="#pro">Fait ta pub !</a>
+              </li>';
+
+              echo '<li class="nav-item">
                 <a href="#" class="add-project nav-link" data-toggle="modal" data-target="#connect">Se connecter</a>
               </li>';
             }
@@ -55,7 +59,7 @@
               </li>';
 
               echo '<li class="nav-item">
-                <a href="profil.php?id='.$_SESSION['id'].'" class="nav-link">Profil</a>
+                <a href="profil.php?id='.$_SESSION["id"].'" class="nav-link">Profil</a>
               </li>';
 
               echo '<li class="nav-item">
@@ -72,11 +76,11 @@
                          <div class="dropdown-menu" aria-labelledby="navadmin">
                            <a href="#" class="dropdown-item add-project" data-toggle="modal" data-target="#add_news">Ajouter news</a>
                            <a href="#" class="dropdown-item add-project" data-toggle="modal" data-target="#list_propo">Liste propositions</a>
-                         </div>
+                          </div>
                         </li>';
 
               echo '<li class="nav-item">
-                <a href="profil.php?id='.$_SESSION['id'].'" class="nav-link">Profil</a>
+                <a href="profil.php?id='.$_SESSION["id"].'" class="nav-link">Profil</a>
               </li>';
 
               echo '<li class="nav-item">
@@ -85,7 +89,7 @@
             }
             if ($droit == 3) {
               echo '<li class="nav-item">
-                <a href="#" class="add-project nav-link" data-toggle="modal" data-target="#add_bp">Proposer Bon plan</a>
+                <a href="#" class="add-project nav-link" data-toggle="modal" data-target="#add_bp">Proposer Bon plan</a><a href="#" class="add-project nav-link" data-toggle="modal" data-target="#add_bp">Proposer Bon plan</a>
               </li>';
 
               echo '<li class="nav-item">
@@ -93,7 +97,7 @@
               </li>';
 
               echo '<li class="nav-item">
-                <a href="profil.php?id='.$_SESSION['id'].'" class="nav-link">Profil</a>
+                <a href="profil.php?id='.$_SESSION["id"].'" class="nav-link">Profil</a>
               </li>';
 
               echo '<li class="nav-item">
