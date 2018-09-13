@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!-- popup connection -->
 <div id="connect" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -105,7 +106,7 @@
 </div>
 <!-- fin popup ajout offre -->
 
-<!-- popup ajout offre-->
+<!-- popup liste offre-->
 <div id="list_propo" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -146,4 +147,4 @@
 
     </div>
 </div>
-<!-- fin popup ajout offre -->
+<!-- fin popup liste offre -->
