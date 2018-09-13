@@ -94,7 +94,8 @@
 
           <!-- Les commentaires commentaire -->
           <?php
-            $req5 = $bdd->prepare("SELECT C.text_com, U.Identifiant, U.IdUtilisateur FROM commentaires C, utilisateurs U WHERE C.idUtilisateur=U.IdUtilisateur ORDER BY date_com");
+            $req5 = $bdd->prepare("SELECT C.text_com, U.Identifiant, U.IdUtilisateur FROM commentaires C, utilisateurs U WHERE C.idUtilisateur=U.IdUtilisateur AND C.idArticle = :id ORDER BY date_com");
+            $req5->bindParam(':id', $_GET['id']);
             $req5->execute();
             $comdata = $req5->fetchall();
             $j = 0;
