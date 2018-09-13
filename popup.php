@@ -105,6 +105,78 @@
     </div>
 </div>
 <!-- fin popup ajout offre -->
+<!-- popup Fait ta pub-->
+<div id="pro" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header login-header">
+                <h4 class="modal-title">Fait ta pub ! (reservé au professionnel)</h4>
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+            <div class="modal-body">
+              <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+              <form>
+                <div class="form-row">
+                  <div class="col form-group">
+                    <label>Votre nom </label>
+                      <input type="text" name="nom" class="form-control" placeholder="">
+                  </div> <!-- form-group end.// -->
+                  <div class="col form-group">
+                    <label>Votre Prénom</label>
+                      <input type="text" name="prenom" class="form-control" placeholder=" ">
+                  </div> <!-- form-group end.// -->
+                </div> <!-- form-row end.// -->
+                <div class="form-group">
+                  <label>Adresse Mail</label>
+                  <input type="email" name="mail" class="form-control" placeholder="">
+                </div> <!-- form-group end.// -->
+                <div class="form-row">
+                  <div class="col form-group">
+                    <label>Nom entreprise</label>
+                      <input type="text" name="entreprise" class="form-control" placeholder="">
+                  </div> <!-- form-group end.// -->
+                  <div class="col form-group">
+                    <label>Numero Siret</label>
+                      <input type="number" name="Siret" class="form-control" placeholder=" ">
+                  </div> <!-- form-group end.// -->
+                </div> <!-- form-row end.// -->
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label>Adresse</label>
+                    <input type="text" class="form-control">
+                  </div> <!-- form-group end.// -->
+                  <div class="form-group col-md-6">
+                    <label>Ville</label>
+                    <select id="inputState" class="form-control">
+                        <option selected="">Nantes</option>
+                        <option>Paris</option>
+                        <option>Lille</option>
+                        <option>Lyon</option>
+                        <option>Bordeaux</option>
+                    </select>
+                  </div> <!-- form-group end.// -->
+                </div> <!-- form-row.// -->
+                <div class="form-group">
+                  <label>Nom d'utilisateur</label>
+                    <input class="form-control" type="password">
+                  <label>Mots de passe</label>
+                    <input class="form-control" type="password">
+                </div> <!-- form-group end.// -->
+                  <div class="form-group">
+                      <button type="submit" class="btn btn-primary btn-block"> Register  </button>
+                  </div> <!-- form-group// -->
+                  <small class="text-muted">Après la création de votre compte vous pourrez proposer votre pup <br>dans la section "proposer votre offre"</small>
+              </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- fin popup ajout offre -->
+<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
 
 <!-- popup liste offre-->
 <div id="list_propo" class="modal fade" role="dialog">
