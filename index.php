@@ -46,7 +46,29 @@
       <!-- Page News -->
       <!-- Ordonnée les news par date la plus récente étant la première -->
       <div class="row text-center">
+        <?php
+        $req = $bdd->prepare("SELECT A.IdArticle, A.Titre, A.Texte, A.Date_article, U.Identifiant, U.IdUtilisateur FROM articles A, utilisateurs U WHERE U.IdUtilisateur = A.IdUtilisateur AND A.Type_article=1 ORDER BY A.Date_article");
+        $req->execute();
+        $data = $req->fetchall();
 
+        $i=0;
+        while (isset($data[$i][0])) {
+          $resume = substr($data[$i][2],0,254);
+          echo '<div class="col-lg-3 col-md-6 mb-4">
+          <div class="card">
+            <img class="card-img-top" src="http://placehold.it/500x325" alt="">
+            <div class="card-body">
+            <h4 class="card-title">'.$data[$i][1].'</h4>
+            <p class="card-text">'.$resume.'</p>
+            </div>
+            <div class="card-footer">
+              <a href="article.php?id='.$data[$i][0].'" class="btn btn-primary">Voir l\'article</a>
+            </div>
+          </div>
+                </div>';
+          $i++;
+        }
+         ?>
         <div class="col-lg-3 col-md-6 mb-4">
           <div class="card">
             <img class="card-img-top" src="http://placehold.it/500x325" alt="">
